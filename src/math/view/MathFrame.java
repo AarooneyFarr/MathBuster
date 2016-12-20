@@ -2,6 +2,8 @@ package math.view;
 
 import javax.swing.JFrame;
 import math.controller.MathController;
+
+import java.awt.Color;
 import java.awt.Dimension;
 
 
@@ -26,9 +28,10 @@ public class MathFrame extends JFrame
 	private void setupPanel(int width, int height)
 	{
 		this.setContentPane(appPanel);
-		this.setTitle("JackBot");
+		this.setTitle("Math Buster");
 		this.setSize(new Dimension(width, height));
 		this.setVisible(true);
+		this.setBackground(Color.BLUE);
 		
 	}
 	

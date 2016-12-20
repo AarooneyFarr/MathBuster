@@ -27,7 +27,7 @@ public class MathController {
 	
 	private void buildMathDex()
 	{
-		Quadratics quad = new Quadratics();
+		Quadratics quad = new Quadratics(this);
 		mathDex.add(quad);
 		System.out.println(quad.getName());
 	}

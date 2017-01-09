@@ -29,11 +29,16 @@ public class MathController {
 	{
 		Quadratics quad = new Quadratics(this);
 		mathDex.add(quad);
-		System.out.println(quad.getName());
+		
 	}
 	
 	public Vector<JPanel> getMathDex()
 	{
 		return mathDex;
+	}
+	
+	public MathFrame getAppFrame()
+	{
+		return appFrame;
 	}
 }

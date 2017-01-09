@@ -5,7 +5,7 @@ import math.controller.MathController;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
+import math.model.*;
 
 public class MathFrame extends JFrame
 {
@@ -18,6 +18,7 @@ public class MathFrame extends JFrame
 		super();
 		this.baseController =  baseController;
 		appPanel = new MathPanel(baseController);
+		
 		
 		setupPanel(500,500);
 		setupListeners();

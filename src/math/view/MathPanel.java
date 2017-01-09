@@ -10,11 +10,13 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import math.model.*;
 
 public class MathPanel extends JPanel
 {
 	private MathController baseController;
 	private JComboBox<JPanel> solverSelector;
+	JPanel cards;
 	
 	public MathPanel(MathController baseController)
 	{
@@ -22,7 +24,6 @@ public class MathPanel extends JPanel
 		setBackground(Color.BLUE);
 		this.baseController = baseController;
 		solverSelector = new JComboBox<JPanel>(baseController.getMathDex());
-		
 		
 		
 		
@@ -54,7 +55,16 @@ public class MathPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
+		solverSelector.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						baseController.getAppFrame().setContentPane((JPanel)solverSelector.getSelectedItem());
+						repaint();
+					}
+				});
 	}
+	
+	
 	
 }

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import math.controller.MathController;
 import math.view.MathPanel;
+import java.util.Vector;
 
 public class Quadratics extends JPanel 
 {
@@ -18,7 +19,8 @@ public class Quadratics extends JPanel
 	private JLabel aLabel;
 	private JLabel bLabel;
 	private JLabel cLabel;
-
+	private JLabel xIntLabel;
+	private JButton enterButton;
 	
 	private JComboBox<JPanel> quadSolverSelector;
 
@@ -39,8 +41,8 @@ public class Quadratics extends JPanel
 		 aLabel = new JLabel("A: ");
 		 bLabel = new JLabel("B: ");
 		 cLabel = new JLabel("C: ");
-
-		
+		 xIntLabel = new JLabel("The X-Intercepts are: ");
+		 enterButton = new JButton("Enter");
 
 		
 		
@@ -67,21 +69,22 @@ public class Quadratics extends JPanel
 		this.add(aLabel);
 		this.add(bLabel);
 		this.add(cLabel);
-
-
+		this.add(xIntLabel);
+		this.add(enterButton);
 		this.add(quadSolverSelector);
 	}
 	
 	private void setupLayout()
 	{
-		aField.setBounds(48,64,78,27);
-		bField.setBounds(180,64,78,27);
-		cField.setBounds(300,64,78,27);
+		aField.setBounds(66,64,78,27);
+		bField.setBounds(210,64,78,27);
+		cField.setBounds(354,64,78,27);
 		quadSolverSelector.setBounds(6,6,159,27);
-		aLabel.setBounds(26, 64, 30, 27);
-		bLabel.setBounds(158, 64, 30, 27);
-		cLabel.setBounds(278, 64, 30, 27);
-
+		aLabel.setBounds(46, 64, 30, 27);
+		bLabel.setBounds(190, 64, 30, 27);
+		cLabel.setBounds(334, 64, 30, 27);
+		xIntLabel.setBounds(6, 103, 488, 27);
+		enterButton.setBounds(211,455,78,27);
 		
 	}
 	
@@ -98,6 +101,75 @@ public class Quadratics extends JPanel
 					}
 
 			});
+		
+		aField.addActionListener(new ActionListener()
+			{
+			
+				public void actionPerformed(ActionEvent e)
+				{
+					if(isDouble(aField.getText()))
+						{
+							bField.requestFocus();
 	
+						}
+				}
+		});
+		
+		bField.addActionListener(new ActionListener()
+			{
+			
+				public void actionPerformed(ActionEvent e)
+				{
+					if(isDouble(bField.getText()))
+						{
+							cField.requestFocus();
+	
+						}
+				}
+		});
+		
+		cField.addActionListener(new ActionListener()
+			{
+			
+				public void actionPerformed(ActionEvent e)
+				{
+					if(isDouble(cField.getText()))
+						{
+							xIntLabel.setText("The X-Intercepts are: " + getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0) + getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1));
+	
+						}
+				}
+		});
+	
+	}
+	
+	public Vector<Double> getXIntercepts(double a, double b, double c)
+	{
+		Vector<Double> xInt = new Vector<Double>();
+		
+		double xIntOne = (-b + Math.sqrt((Math.pow(b,2))-((4)*(a)*(c))))/(2*a);
+		double xIntTwo = (-b + Math.sqrt((Math.pow(b,2))-((4)*(a)*(c))))/(2*a);
+		
+		//if (xIntOne == Double.NaN)
+		
+		
+		xInt.add(xIntOne);
+		xInt.add(xIntTwo);
+		return xInt;
+	}
+	
+	private boolean isDouble(String input)
+	{
+		Boolean isDouble = false;
+		try 
+			{
+				Double.parseDouble(input);
+				isDouble = true;
+			}
+		catch(NumberFormatException error)
+			{
+				JOptionPane.showMessageDialog(this, "Please type in a valid number.");
+			}
+	return isDouble;
 	}
 }

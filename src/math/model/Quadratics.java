@@ -22,6 +22,7 @@ public class Quadratics extends JPanel
 	private JLabel cLabel;
 	private JLabel xIntLabel;
 	private JButton enterButton;
+	private JPanel quad;
 	
 	private JComboBox<JPanel> quadSolverSelector;
 
@@ -44,7 +45,7 @@ public class Quadratics extends JPanel
 		 cLabel = new JLabel("C: ");
 		 xIntLabel = new JLabel("The X-Intercepts are: ");
 		 enterButton = new JButton("Enter");
-
+		 quad = this;
 		
 		
 		setupPanel();
@@ -108,10 +109,14 @@ public class Quadratics extends JPanel
 			
 				public void actionPerformed(ActionEvent e)
 				{
-					if(isDouble(aField.getText()))
+					if(isDouble(aField.getText()) && Double.parseDouble(aField.getText()) != 0)
 						{
 							bField.requestFocus();
 	
+						}
+					else if(isDouble(aField.getText()))
+						{
+							JOptionPane.showMessageDialog(quad, "0 is not a valid A value");
 						}
 				}
 		});

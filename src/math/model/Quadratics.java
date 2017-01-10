@@ -1,7 +1,9 @@
 package math.model;
 
 import java.awt.Color;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import javax.swing.*;
 import math.controller.MathController;
 import math.view.MathPanel;
@@ -39,7 +41,6 @@ public class Quadratics extends JPanel
 		 cLabel = new JLabel("C: ");
 
 		
-		quadSolverSelector = new JComboBox<JPanel>(baseController.getMathDex());
 
 		
 		
@@ -59,6 +60,7 @@ public class Quadratics extends JPanel
 	private void setupPanel()
 	{
 		setLayout(null);
+		this.setMinimumSize(new Dimension(500,500));
 		this.add(aField);
 		this.add(bField);
 		this.add(cField);
@@ -85,7 +87,17 @@ public class Quadratics extends JPanel
 	
 	private void setupListeners()
 	{
-		
+		quadSolverSelector.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+					{
+						JPanel selected = (JPanel) quadSolverSelector.getSelectedItem();
+						baseController.getAppFrame().setContentPane(selected);
+						baseController.getAppFrame().validate();
+						
+					}
+
+			});
 	
 	}
 }

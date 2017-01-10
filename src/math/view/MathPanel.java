@@ -59,8 +59,10 @@ public class MathPanel extends JPanel
 				{
 					public void actionPerformed(ActionEvent e)
 					{
-						baseController.getAppFrame().setContentPane((JPanel)solverSelector.getSelectedItem());
-						repaint();
+						JPanel selected = (JPanel) solverSelector.getSelectedItem();
+						baseController.getAppFrame().setContentPane(selected);
+						baseController.getAppFrame().validate();
+						
 					}
 				});
 	}

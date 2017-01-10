@@ -29,6 +29,8 @@ public class MathController {
 	{
 		Quadratics quad = new Quadratics(this);
 		mathDex.add(quad);
+		Sphere sphere = new Sphere(this);
+		mathDex.add(sphere);
 		
 	}
 	

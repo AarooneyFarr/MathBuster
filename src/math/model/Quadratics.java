@@ -8,6 +8,7 @@ import javax.swing.*;
 import math.controller.MathController;
 import math.view.MathPanel;
 import java.util.Vector;
+import java.math.*;
 
 public class Quadratics extends JPanel 
 {
@@ -135,7 +136,7 @@ public class Quadratics extends JPanel
 				{
 					if(isDouble(cField.getText()))
 						{
-							xIntLabel.setText("The X-Intercepts are: " + getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0) + getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1));
+							xIntLabel.setText("The X-Intercepts are: " + round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0),4) + ", " + round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1),4));
 	
 						}
 				}
@@ -171,5 +172,13 @@ public class Quadratics extends JPanel
 				JOptionPane.showMessageDialog(this, "Please type in a valid number.");
 			}
 	return isDouble;
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 }

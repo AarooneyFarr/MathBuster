@@ -21,6 +21,7 @@ public class Quadratics extends JPanel
 		private JLabel bLabel;
 		private JLabel cLabel;
 		private JLabel xIntLabel;
+		private JLabel disLabel;
 		private JButton enterButton;
 		private JPanel quad;
 
@@ -41,6 +42,7 @@ public class Quadratics extends JPanel
 				bLabel = new JLabel("B: ");
 				cLabel = new JLabel("C: ");
 				xIntLabel = new JLabel("The X-Intercepts are: ");
+				disLabel = new JLabel("The Discriminant is: ");
 				enterButton = new JButton("Enter");
 				quad = this;
 
@@ -67,6 +69,7 @@ public class Quadratics extends JPanel
 				this.add(bLabel);
 				this.add(cLabel);
 				this.add(xIntLabel);
+				this.add(disLabel);
 				this.add(enterButton);
 				this.add(quadSolverSelector);
 			}
@@ -81,6 +84,7 @@ public class Quadratics extends JPanel
 				bLabel.setBounds(190, 64, 30, 27);
 				cLabel.setBounds(334, 64, 30, 27);
 				xIntLabel.setBounds(6, 103, 488, 27);
+				disLabel.setBounds(6, 133, 488, 27);
 				enterButton.setBounds(211, 455, 78, 27);
 
 			}

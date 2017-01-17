@@ -143,7 +143,7 @@ public class Quadratics extends JPanel
 										xIntLabel.setText("The X-Intercepts are: "
 												+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0), 4) + ", "
 												+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1), 4));
-
+										disLabel.setText("The Discriminant is: " + round(getDiscriminant(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())), 4));
 									}
 							}
 					});
@@ -157,6 +157,7 @@ public class Quadratics extends JPanel
 									xIntLabel.setText("The X-Intercepts are: "
 											+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0), 4) + ", "
 											+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1), 4));
+									disLabel.setText("The Discriminant is: " + round(getDiscriminant(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())), 4));
 
 								}
 							else if (isDouble(aField.getText()))

@@ -1,6 +1,7 @@
 package math.model;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,15 +13,17 @@ public class Sphere extends JPanel
 	{
 		private MathController baseController;
 		private JComboBox<JPanel> sphereSolverSelector;
-		private JTextField radText;
-		private JTextField diaText;
+		private JTextField radField;
+		private JTextField diaField;
 		private JLabel radLabel;
 		private JLabel diaLabel;
+		private JPanel sphere;
 //		private JLabel SALabel;
 //		private JTextField SAField;
 //		private JLabel volumeLabel;
 //		private JTextField volumeField;
 //TODO add rest of items, add listeners, and catch exceptions
+		double diameter, radius;
 		
 		public Sphere(MathController baseController)
 			{
@@ -29,11 +32,14 @@ public class Sphere extends JPanel
 
 				this.baseController = baseController;
 				sphereSolverSelector = new JComboBox<JPanel>(baseController.getMathDex());
-				radText = new JTextField();
-				diaText = new JTextField();
+				radField = new JTextField();
+				diaField = new JTextField();
 				radLabel = new JLabel("Radius: ");
 				diaLabel = new JLabel("Diameter: ");
-
+				sphere = this;
+				diameter = 0;
+				radius = 0;
+				
 				setupPanel();
 				setupLayout();
 				setupListeners();
@@ -49,8 +55,8 @@ public class Sphere extends JPanel
 			{
 				setLayout(null);
 				this.add(sphereSolverSelector);
-				this.add(radText);
-				this.add(diaText);
+				this.add(radField);
+				this.add(diaField);
 				this.add(radLabel);
 				this.add(diaLabel);
 
@@ -59,8 +65,8 @@ public class Sphere extends JPanel
 		public void setupLayout()
 			{
 				sphereSolverSelector.setBounds(6, 6, 159, 27);
-				radText.setBounds(114, 64, 78, 27);
-				diaText.setBounds(306, 64, 78, 27);
+				radField.setBounds(114, 64, 78, 27);
+				diaField.setBounds(306, 64, 78, 27);
 				radLabel.setBounds(46, 64, 56, 27);
 				diaLabel.setBounds(235, 64, 65, 27);
 			}
@@ -78,20 +84,29 @@ public class Sphere extends JPanel
 						}
 
 				});
-			radText.addActionListener(new ActionListener()
+			//TODO fix listeners
+			/*radField.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+						{
+							if (isDouble(radField.getText()) && Double.parseDouble(radField.getText()) != 0)
+								{
+									diaField.requestFocus();
+
+								}
+							else if (isDouble(aField.getText()))
+								{
+									JOptionPane.showMessageDialog(sphere, "0 is not a valid A value");
+								}
+						}
+				});
+			diaField.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 						{
 							
 						}
-				});
-			diaText.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e)
-						{
-							
-						}
-				});
+				}); */
 			
 		}
 		
@@ -131,7 +146,27 @@ public class Sphere extends JPanel
 			return answer;
 		}
 		
-		
-		
+		//TODO change algorithm to match
+		/*
+		public void paintComponent(Graphics page)
+			   {  
+
+			     super.paintComponent (page);
+
+			     for ( x=-50; x <= 50; x+= 0.1 )
+			     {
+			    	
+			    	 
+			    	 
+			         Y = (A*(Math.pow(x,2)))+(B*x)+(C);
+			         int g = (int)Math.round(x);
+			         int h = (int)Math.round(Y);
+			         page.setColor (Color.black);
+			          page.fillOval (g + 250, h + 250, 4, 4);
+			      }
+
+
+			    }
+		*/
 		
 	}

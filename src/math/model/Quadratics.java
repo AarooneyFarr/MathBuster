@@ -9,7 +9,10 @@ import math.controller.MathController;
 import math.view.MathPanel;
 import java.util.Vector;
 import java.math.*;
+import java.awt.*;
 
+// Naming convention: should probably be named QuadraticsPanel or something like that.
+// Also this should be in the view package not the model.
 public class Quadratics extends JPanel
 	{
 
@@ -24,6 +27,7 @@ public class Quadratics extends JPanel
 		private JLabel disLabel;
 		private JButton enterButton;
 		private JPanel quad;
+		double A, B, C, x, Y;
 
 		private JComboBox<JPanel> quadSolverSelector;
 
@@ -46,14 +50,23 @@ public class Quadratics extends JPanel
 				enterButton = new JButton("Enter");
 				quad = this;
 
+				A = 0;
+				B = 0;
+				C = 0;
+				x = 0;
+				Y = 0;
+				
+				
 				setupPanel();
 
 				setupLayout();
 				setupListeners();
 
 			}
+		
+		
 
-		public String toString()
+ 		public String toString()
 			{
 				return "Quadratics";
 			}
@@ -86,6 +99,7 @@ public class Quadratics extends JPanel
 				xIntLabel.setBounds(6, 103, 488, 27);
 				disLabel.setBounds(6, 133, 488, 27);
 				enterButton.setBounds(211, 455, 78, 27);
+				
 
 			}
 
@@ -142,6 +156,12 @@ public class Quadratics extends JPanel
 									{
 										try
 										{
+											
+										    	 A = Double.parseDouble(aField.getText());
+										    	 B = Double.parseDouble(bField.getText());
+										    	 C = Double.parseDouble(cField.getText());
+										    	
+											
 										xIntLabel.setText("The X-Intercepts are: "
 												+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0), 4) + ", "
 												+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1), 4));
@@ -151,6 +171,8 @@ public class Quadratics extends JPanel
 										{
 											JOptionPane.showMessageDialog(quad, "The X-intercepts are not real.");	
 										}
+										
+										repaint();
 									}
 							}
 					});
@@ -165,7 +187,7 @@ public class Quadratics extends JPanel
 											+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(0), 4) + ", "
 											+ round(getXIntercepts(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())).get(1), 4));
 									disLabel.setText("The Discriminant is: " + round(getDiscriminant(Integer.parseInt(aField.getText()), Integer.parseInt(bField.getText()), Integer.parseInt(cField.getText())), 4));
-
+									repaint();
 								}
 							else if (isDouble(aField.getText()))
 								{
@@ -176,6 +198,7 @@ public class Quadratics extends JPanel
 
 			}
 
+		
 		public Vector<Double> getXIntercepts(double a, double b, double c)
 			{
 				Vector<Double> xInt = new Vector<Double>();
@@ -189,7 +212,8 @@ public class Quadratics extends JPanel
 				xInt.add(xIntTwo);
 				return xInt;
 			}
-
+		
+		
 		public double getDiscriminant(double a, double b, double c)
 			{
 				double dis = Math.pow(b, 2) - (4 * a * c);
@@ -221,4 +245,30 @@ public class Quadratics extends JPanel
 				bd = bd.setScale(places, RoundingMode.HALF_UP);
 				return bd.doubleValue();
 			}
+		
+		private double getYValue(double a, double b, double c, double x)
+		{
+			double yValue = (a * Math.pow(x, 2)) + b*x + c;
+			return yValue;
+		}
+		
+		public void paintComponent(Graphics page)
+			   {  
+
+			     super.paintComponent (page);
+
+			     for ( x=-50; x <= 50; x+= 0.1 )
+			     {
+			    	
+			    	 
+			    	 
+			         Y = (A*(Math.pow(x,2)))+(B*x)+(C);
+			         int g = (int)Math.round(x);
+			         int h = (int)Math.round(Y);
+			         page.setColor (Color.black);
+			          page.fillOval (g + 250, h + 250, 4, 4);
+			      }
+
+
+			    }
 	}

@@ -1,10 +1,11 @@
 package math.model;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.BasicStroke;
 import javax.swing.*;
 import math.controller.MathController;
 import math.view.MathPanel;
@@ -18,6 +19,7 @@ public class Sphere extends JPanel
 		private JLabel radLabel;
 		private JLabel diaLabel;
 		private JPanel sphere;
+		private JLabel radiusNumberLabel;
 //		private JLabel SALabel;
 //		private JTextField SAField;
 //		private JLabel volumeLabel;
@@ -39,6 +41,7 @@ public class Sphere extends JPanel
 				sphere = this;
 				diameter = 0;
 				radius = 0;
+				radiusNumberLabel = new JLabel("");
 				
 				setupPanel();
 				setupLayout();
@@ -59,7 +62,8 @@ public class Sphere extends JPanel
 				this.add(diaField);
 				this.add(radLabel);
 				this.add(diaLabel);
-
+				this.add(radiusNumberLabel);
+				
 			}
 
 		public void setupLayout()
@@ -84,19 +88,23 @@ public class Sphere extends JPanel
 						}
 
 				});
-			//TODO fix listeners
-			/*radField.addActionListener(new ActionListener()
+			
+			radField.addActionListener(new ActionListener()
 				{
 					public void actionPerformed(ActionEvent e)
 						{
 							if (isDouble(radField.getText()) && Double.parseDouble(radField.getText()) != 0)
 								{
-									diaField.requestFocus();
+									radius = Integer.parseInt(radField.getText());
+									diaField.setText((int) getCircumference(Double.parseDouble(radField.getText())) + "");
+									radiusNumberLabel.setBounds((250 + ((int) Double.parseDouble(radField.getText()))/2)-15, 195, 27, 92);
+									radiusNumberLabel.setText((int) Double.parseDouble(radField.getText()) + "");
+									repaint();
 
 								}
-							else if (isDouble(aField.getText()))
+							else if (isDouble(radField.getText()))
 								{
-									JOptionPane.showMessageDialog(sphere, "0 is not a valid A value");
+									JOptionPane.showMessageDialog(sphere, "0 is not a valid radius");
 								}
 						}
 				});
@@ -104,9 +112,21 @@ public class Sphere extends JPanel
 				{
 					public void actionPerformed(ActionEvent e)
 						{
-							
+							if (isDouble(diaField.getText()) && Double.parseDouble(diaField.getText()) != 0)
+								{
+									radius = getRadiusWithCircumference(Double.parseDouble(diaField.getText()));
+									radField.setText((int) getRadiusWithCircumference(Double.parseDouble(diaField.getText())) + "");
+									radiusNumberLabel.setBounds((250 + ((int) radius/2))-15, 195, 27, 92);
+									radiusNumberLabel.setText((int) radius + "");
+									repaint();
+
+								}
+							else if (isDouble(diaField.getText()))
+								{
+									JOptionPane.showMessageDialog(sphere, "0 is not a valid radius");
+								}
 						}
-				}); */
+				}); 
 			
 		}
 		
@@ -146,27 +166,45 @@ public class Sphere extends JPanel
 			return answer;
 		}
 		
-		//TODO change algorithm to match
-		/*
+		private double getRadiusWithCircumference(double circumference)
+		{
+			double answer = circumference/(2*Math.PI);
+			return answer;
+		}
+		
+		private boolean isDouble(String input)
+			{
+				Boolean isDouble = false;
+				try
+					{
+						Double.parseDouble(input);
+						isDouble = true;
+					}
+				catch (NumberFormatException error)
+					{
+						JOptionPane.showMessageDialog(this, "Please type in a valid number.");
+					}
+				return isDouble;
+			}
+		
+		
+		
 		public void paintComponent(Graphics page)
 			   {  
-
+				   Graphics2D g2 = (Graphics2D) page;
 			     super.paintComponent (page);
 
-			     for ( x=-50; x <= 50; x+= 0.1 )
-			     {
-			    	
+			     	BasicStroke dashed = new BasicStroke(3);
 			    	 
 			    	 
-			         Y = (A*(Math.pow(x,2)))+(B*x)+(C);
-			         int g = (int)Math.round(x);
-			         int h = (int)Math.round(Y);
+			         
+			        
 			         page.setColor (Color.black);
-			          page.fillOval (g + 250, h + 250, 4, 4);
-			      }
-
+			         g2.setStroke(dashed);
+			         page.drawOval(250 - (int)radius , 250 - (int) radius ,(int) radius * 2, (int) radius * 2);
+			         page.drawLine(250,250,249 + (int) radius, 250);
 
 			    }
-		*/
+		
 		
 	}
